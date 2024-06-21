@@ -1,0 +1,61 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateUserDto {
+  email: String!
+  name: String!
+  password: String!
+  passwordConfirm: String!
+  surname: String
+}
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  deleteUser(id: String!): String!
+  login(loginInput: LoginDto!): UserType!
+  logout: String!
+  refreshTokens: String!
+  register(registerInput: CreateUserDto!): UserType!
+  updateUser(updateUserInput: UpdateUserDto!): String!
+  updateUserAvatar(image: Upload!): String!
+}
+
+enum Providers {
+  GOOGLE
+  LOCAL
+}
+
+type Query {
+  admin: String!
+  getUserProfile(nickname: String!): UserType!
+}
+
+enum Roles {
+  ADMIN
+  USER
+}
+
+input UpdateUserDto {
+  name: String!
+  surname: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UserType {
+  avatar: String
+  email: String!
+  id: String!
+  name: String!
+  nickname: String!
+  provider: Providers!
+  roles: [Roles!]
+  surname: String
+  token: String
+}
