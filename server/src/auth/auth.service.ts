@@ -22,7 +22,7 @@ export class AuthService {
 	) {}
 
 	async register(data: CreateUserDto) {
-		return await this.userService.create(data)
+		return this.userService.create(data)
 	}
 
 	async login(data: LoginDto) {
@@ -121,6 +121,6 @@ export class AuthService {
 		}
 		const user = await this.userService.findByEmailOrId(existingToken.userId)
 		if (!user) throw new NotFoundException({logout: 'Unexpected error. There seems to be something wrong with your account'})
-		return await this.generateTokens(user, token)
+		return this.generateTokens(user, token)
 	}
 }

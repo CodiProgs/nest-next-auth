@@ -18,12 +18,12 @@ export class UserResolver {
 
 	@Query(() => UserType)
 	async getUserProfile(@Args('nickname') nickname: string) {
-		return await this.userService.findByNickname(nickname)
+		return this.userService.findByNickname(nickname)
 	}
 
 	@Mutation(() => String)
 	async deleteUser(@Args('id') id: string, @CurrentUser() user: JwtPayload) {
-		return await this.userService.delete(id, user)
+		return this.userService.delete(id, user)
 	}
 
 	@Mutation(() => String)
@@ -31,7 +31,7 @@ export class UserResolver {
 		@CurrentUser('id') id: string,
 		@Args('updateUserInput') dto: UpdateUserDto,
 	) {
-		return await this.userService.update(id, dto)
+		return this.userService.update(id, dto)
 	}
 
 	@Mutation(() => String)

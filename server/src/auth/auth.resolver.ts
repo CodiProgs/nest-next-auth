@@ -63,7 +63,7 @@ export class AuthResolver {
 		@Cookie('refreshToken') refreshToken: string,
 		@Context() context: { res: Response }
 	) {
-		return await this.authService.logout(refreshToken, context.res)
+		return this.authService.logout(refreshToken, context.res)
 	}
 
 	@Mutation(() => String)
