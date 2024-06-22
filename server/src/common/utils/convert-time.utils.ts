@@ -28,6 +28,8 @@ export const convertTime = (time: string, targetUnit: TimeUnit): number => {
 		throw new Error('Invalid target time unit')
 	}
 
+	if (sourceUnit === targetUnit) return num
+
 	const timeInSeconds = num * timeUnits[sourceUnit]
 	return timeInSeconds / timeUnits[targetUnit]
 }

@@ -5,7 +5,7 @@ import { CreateUserDto } from 'src/user/dto/create-user.dto'
 import { Cookie, IpAddress, Public, UserAgent } from 'src/common/decorators'
 import { Response } from 'express'
 import { LoginDto } from './dto/login.dto'
-import { UnauthorizedException } from '@nestjs/common'
+import { BadRequestException, UnauthorizedException } from '@nestjs/common'
 
 @Resolver()
 @Public()
@@ -73,7 +73,10 @@ export class AuthResolver {
 		@IpAddress() ip: string,
 		@UserAgent() userAgent: string
 	) {
-		if (!refreshToken) throw new UnauthorizedException({logout: 'Your session has expired. Log in again'})
+		if (!refreshToken)
+			throw new BadRequestException({
+				logout: 'Your session has expired. Log in again'
+			})
 		const tokens = await this.authService.refreshTokens(refreshToken, {
 			ip,
 			userAgent

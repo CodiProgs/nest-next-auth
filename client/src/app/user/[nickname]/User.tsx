@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { IoMdSettings } from 'react-icons/io';
-import { useGetUserProfileQuery } from '../../../gql/graphql';
+import { useSession } from 'next-auth/react'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { IoMdSettings } from 'react-icons/io'
+import { useGetUserProfileQuery } from '../../../gql/graphql'
 
 export default function User() {
-	const { nickname } = useParams() as { nickname: string };
+	const { nickname } = useParams() as { nickname: string }
 	const { data, loading, error } = useGetUserProfileQuery({
 		variables: { nickname }
-	});
+	})
 
-	const { data: session } = useSession();
+	const { data: session } = useSession()
 
 	return loading ? (
 		<div>Loading...</div>
@@ -34,8 +34,8 @@ export default function User() {
 					)}
 				</div>
 			) : (
-				<div>{error.message}</div>
+				<div>An error has occurred.</div>
 			)}
 		</>
-	);
+	)
 }
